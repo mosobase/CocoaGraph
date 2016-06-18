@@ -28,12 +28,6 @@
   
   self.limit = 0;
   
-  self.graphView.dataSpacing = 30;
-  
-  
-  
-//  self.graphView.lineStyle = LineStyleStraight;
-  
   self.graphView.data = [self generateRandomDataWithNumberOfItems:100
                                                          maxValue:250];
   
@@ -58,7 +52,7 @@
 {
   [super viewWillAppear];
   
-  [self.graphView draw];
+  [self.graphView.layer setNeedsDisplay];
   
 }
 

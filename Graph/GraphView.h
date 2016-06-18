@@ -14,14 +14,14 @@ typedef NS_ENUM(NSUInteger, LineStyle) {
 };
 
 @interface GraphView : NSView
-
+/// NSArray containing data points reprsenting the y-coordinate of the graph
 @property (nonatomic) NSArray *data;
-
+/// Distance between graph points
 @property (nonatomic) float dataSpacing;
+/// Curviness of the lines, yes, curviness
 @property (nonatomic) float lineCurveValue;
+/// Indicate the style of the graph; connected by straight lines or curved lines
 @property (nonatomic) LineStyle lineStyle;
 
-
-- (void)draw;
 
 @end

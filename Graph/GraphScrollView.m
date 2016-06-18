@@ -7,7 +7,6 @@
 //
 
 #import "GraphScrollView.h"
-#import "GraphView.h"
 
 @implementation GraphScrollView
 
@@ -17,6 +16,7 @@
   if (self) {
     self.horizontalScroller.alphaValue = 0;
     self.verticalScroller.alphaValue = 0;
+    
   }
   return self;
 }
@@ -25,9 +25,9 @@
 {
   [super scrollWheel: event];
   
-  [(GraphView *)self.documentView draw];
+  [self.documentView.layer setNeedsDisplay];
   
-  NSLog(@"%f", self.documentVisibleRect.origin.x);
+//  NSLog(@"%f", self.documentVisibleRect.origin.x);
 }
 
 @end
