@@ -27,7 +27,6 @@ static NSString *const DataCounterKeyWiFiReceived = @"WiFiReceived";
 
 @interface Network()
 @property (nonatomic) double previousWiFiReceived;
-@property (nonatomic) double previousWiFiDelta;
 @end
 
 
@@ -106,31 +105,26 @@ static NSString *const DataCounterKeyWiFiReceived = @"WiFiReceived";
     
     freeifaddrs(addrs);
   }
+
   
-  
-  //
-  //
-  double dWiFiReceived = (double) WiFiReceived;
-  
-  double currentWifiDelta = dWiFiReceived - self.previousWiFiReceived;
+  double currentWifiDelta = WiFiReceived - self.previousWiFiReceived;
+  if (!self.previousWiFiReceived) currentWifiDelta = 0;
+  self.previousWiFiReceived = WiFiReceived;
   
   //LowPass
-  double α = 0.1;
-  double newVal = (currentWifiDelta * α * 10) + (self.previousWiFiDelta * (1.0 - α));
+//  double α = 0.1;
+//  double newVal = (currentWifiDelta * α * 10) + (self.previousWiFiDelta * (1.0 - α));
   
   
-  NSLog(@"%f", newVal * Megabit);
-  
-  
-  self.previousWiFiDelta = currentWifiDelta;
-  self.previousWiFiReceived = dWiFiReceived;
-  
+  NSLog(@"%f", currentWifiDelta * Megabit);
   
   NSDictionary *result =
   @{DataCounterKeyWiFiSent:[NSNumber numberWithUnsignedInt:WiFiSent],
-    DataCounterKeyWiFiReceived: [NSNumber numberWithFloat:newVal * Megabit],
+    DataCounterKeyWiFiReceived: [NSNumber numberWithFloat:currentWifiDelta * Megabit],
     DataCounterKeyWWANSent:[NSNumber numberWithUnsignedInt:WWANSent],
     DataCounterKeyWWANReceived:[NSNumber numberWithUnsignedInt:WWANReceived]};
+  
+  
   
   
 //  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{

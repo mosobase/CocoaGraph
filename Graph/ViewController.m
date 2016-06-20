@@ -10,12 +10,13 @@
 #import "GraphView.h"
 #import "Network.h"
 #import "GraphScrollView.h"
+#import "NSColor+Theme.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ViewController()
 
 @property (nonatomic) IBOutlet GraphView *graphView;
 @property (nonatomic) IBOutlet GraphScrollView *graphScrollView;
-
 @property (nonatomic) int limit;
 
 @end
@@ -28,11 +29,14 @@
   
   self.limit = 0;
   
-  self.graphView.data = [self generateRandomDataWithNumberOfItems:100
-                                                         maxValue:250];
+  self.graphView.strokeGradientColors =
+  @[(__bridge id)NSColorFromRGB(0x6fbb3d).CGColor,
+    (__bridge id)NSColorFromRGB(0x01b0bd).CGColor];
+  
+//  self.graphView.data = [self generateRandomDataWithNumberOfItems:100
+//                                                         maxValue:250];
   
   
-//  [self.graphView draw];
   
 //
 //  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
@@ -43,7 +47,9 @@
 //    
 //  });
   
-//  [self populateWithNetworkActivity];
+  [self populateWithNetworkActivity];
+  
+  [self tick];
   
 }
 
@@ -56,9 +62,38 @@
   
 }
 
+- (void)tick
+{
+      
+//      [self.graphScrollView.documentView.layer setNeedsDisplay];
+      
+      NSPoint destination = self.graphScrollView.documentVisibleRect.origin;
+      destination.x += 30;
+      
+      
+      
+      [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        [context setDuration: 0];
+        [context setTimingFunction:
+         [CAMediaTimingFunction functionWithName:
+          kCAMediaTimingFunctionEaseInEaseOut]];
+        
+        NSClipView *contentView = [self.graphScrollView contentView];
+        [[contentView animator] setBoundsOrigin:destination];
+        
+      } completionHandler: ^{
+        [self.graphScrollView.documentView.layer setNeedsDisplay];
+      }];
+  
+  
+   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+      [self tick];
+    });
+}
+
 - (void)populateWithNetworkActivity
 {
-  if (self.limit == 30) return;
+  if (self.limit == 60) return;
   
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
     

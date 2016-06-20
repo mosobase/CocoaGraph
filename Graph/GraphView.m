@@ -8,7 +8,6 @@
 
 #import "GraphView.h"
 #import "NSBezierPath+utilities.h"
-#import "NSColor+Theme.h"
 #import <QuartzCore/QuartzCore.h>
 
 
@@ -115,9 +114,14 @@
   self.path = [NSBezierPath bezierPath];
   [self.path moveToPoint:NSZeroPoint];
   
-  for (int i = 0; i < self.activeGraphPoints.count; i++)
+  NSArray *activeGraphPoints = self.activeGraphPoints;
+  double maxActiveYPoint = [self maxYCoordinateInArray:activeGraphPoints];
+  double ratio = self.bounds.size.height / maxActiveYPoint;
+  
+  for (int i = 0; i < activeGraphPoints.count; i++)
   {
-    NSPoint nextPoint = [self.activeGraphPoints[i] pointValue];
+    NSPoint nextPoint = [activeGraphPoints[i] pointValue];
+    nextPoint.y *= ratio;
     segmentAdder(self.path.currentPoint, nextPoint, self.path);
   }
   
@@ -131,27 +135,24 @@
   self.graphLayer.strokeColor = NSColor.whiteColor.CGColor;
   
   
-  self.gradientLayer.startPoint = CGPointMake(0.5,1.0);
-  self.gradientLayer.endPoint = CGPointMake(0.5,0.0);
-  self.gradientLayer.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+  self.gradientLayer.startPoint = CGPointMake(0.5,0.0);
+  self.gradientLayer.endPoint = CGPointMake(0.5,1.0);
+  self.gradientLayer.frame = CGRectMake(0, 0, self.bounds.size.width,
+                                        self.bounds.size.height);
   
   
-  NSMutableArray *colors = [NSMutableArray array];
-  for (int i = 0; i < 10; i++) {
-    [colors addObject:(id)[[NSColor colorWithHue:(0.1 * i) saturation:1 brightness:.8 alpha:1] CGColor]];
-  }
-  self.gradientLayer.colors = colors;
+  self.gradientLayer.colors = self.strokeGradientColors ?: [self stockGradient];
   
 }
 
 - (void)updateFrame
 {
   NSRect frame = [self frame];
-  frame.size.width = (self.data.count * self.dataSpacing) + self.dataSpacing;
+  frame.size.width = MAX((self.data.count * self.dataSpacing) + self.dataSpacing,
+                         self.bounds.size.width);
   self.frame = frame;
   
 }
-
 
 - (void)addStraigtLineSegmentFrom: (NSPoint)startPoint
                                to: (NSPoint)endPoint inPath: (NSBezierPath *)path
@@ -203,6 +204,30 @@
 -(NSArray *)activeGraphPoints
 {
   return [self.graphPoints subarrayWithRange:[self rangeForAcivePoints]];
+}
+
+- (NSArray *)stockGradient
+{
+  NSMutableArray *colors = [NSMutableArray array];
+  for (int i = 0; i < 10; i++) {
+    [colors addObject:(id)[[NSColor colorWithHue:(0.1 * i) saturation:1
+                                      brightness:.8 alpha:1] CGColor]];
+  }
+  
+  return colors;
+}
+
+- (double)maxYCoordinateInArray: (NSArray *)array
+{
+  double max = 1;
+  
+  for (NSValue *value in array)
+  {
+    NSPoint pointValue = [value pointValue];
+    if (pointValue.y >= max) max = pointValue.y;
+  }
+  
+  return max;
 }
 
 #pragma mark Private Methods

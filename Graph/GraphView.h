@@ -22,6 +22,8 @@ typedef NS_ENUM(NSUInteger, LineStyle) {
 @property (nonatomic) float lineCurveValue;
 /// Indicate the style of the graph; connected by straight lines or curved lines
 @property (nonatomic) LineStyle lineStyle;
+/// NSArray of CGColorRef values making up the stroke gradient
+@property (nonatomic) NSArray *strokeGradientColors;
 
 
 @end
