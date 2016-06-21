@@ -13,17 +13,25 @@ typedef NS_ENUM(NSUInteger, LineStyle) {
   LineStyleStraight
 };
 
+typedef NS_ENUM(NSUInteger, GraphDataInputType) {
+  /// All graph data will be delivered in one data payload
+  GraphDataInputConstant,
+  /// Graph data will be updated on a rolling basis
+  GraphDataInputRolling
+};
+
 @interface GraphView : NSView
 /// NSArray containing data points reprsenting the y-coordinate of the graph
 @property (nonatomic) NSArray *data;
 /// Distance between graph points
-@property (nonatomic) float dataSpacing;
+@property (nonatomic) CGFloat dataSpacing;
 /// Curviness of the lines, yes, curviness
 @property (nonatomic) float lineCurveValue;
 /// Indicate the style of the graph; connected by straight lines or curved lines
 @property (nonatomic) LineStyle lineStyle;
 /// NSArray of CGColorRef values making up the stroke gradient
 @property (nonatomic) NSArray *strokeGradientColors;
-
+/// Indicates if graph data will be delivered in a single payload or by appending new values to data array
+@property (nonatomic) GraphDataInputType graphDataInputType;
 
 @end

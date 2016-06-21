@@ -8,6 +8,7 @@
 
 #import "GraphView.h"
 #import "NSBezierPath+utilities.h"
+#import "NSColor+Theme.h"
 #import <QuartzCore/QuartzCore.h>
 
 
@@ -55,50 +56,29 @@
   [self.layer addSublayer:self.gradientLayer];
   
   self.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
-  
-  self.layer.backgroundColor = [NSColor blackColor].CGColor;
+  self.layer.backgroundColor = NSColorFromRGB(0xf2f1f0).CGColor;
   [self.layer setNeedsDisplay];
 }
 
 - (void)setDefaults
 {
+  self.dataSpacing    = 30;
   self.lineCurveValue = 0.5;
-  self.dataSpacing = 30;
+  self.data = [self populateEmptyData];
 }
 
-//- (void)drawRect:(NSRect)dirtyRect {
-//  [super drawRect:dirtyRect];
-//
-//
-//  NSGraphicsContext *context = [NSGraphicsContext currentContext];
-//  [context setShouldAntialias:YES];
-//
-//  CGContextBeginTransparencyLayerWithRect([context CGContext], self.bounds, nil);
-//  [[NSColor blueColor] setStroke];
-//  [self.path stroke];
-//
-//  CGContextSetBlendMode([context CGContext], kCGBlendModeSourceIn);
-//
-//  CGFloat colorLocations[] = {0.0, 1.0};
-//  CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-//  NSArray *colors = @[(__bridge id)NSColorFromRGB(0x6fbb3d).CGColor,
-//                      (__bridge id)NSColorFromRGB(0x01b0bd).CGColor];
-//
-//  CGGradientRef gradient = CGGradientCreateWithColors(colorSpace,
-//                                                      (__bridge CFArrayRef)colors,
-//                                                      colorLocations);
-//
-//  CGPoint gradientStart = CGPointZero;
-//  CGPoint gradientEnd = CGPointMake(0, self.bounds.size.height);
-//
-//  CGContextDrawLinearGradient([context CGContext], gradient, gradientStart,
-//                              gradientEnd, kCGGradientDrawsBeforeStartLocation);
-//  CGContextEndTransparencyLayer([context CGContext]);
-//
-//  CGColorSpaceRelease(colorSpace);
-//  CGGradientRelease(gradient);
-//
-//}
+- (NSArray *)populateEmptyData
+{
+  int maxNumberOfGraphPoints = self.bounds.size.width / self.dataSpacing;
+  NSMutableArray *defaultArray = [NSMutableArray new];
+  
+  for (int i= 0 ; i < maxNumberOfGraphPoints; i++)
+  {
+    [defaultArray addObject:@0];
+  }
+  
+  return defaultArray;
+}
 
 -(void)updateLayer
 {
@@ -118,6 +98,14 @@
   double maxActiveYPoint = [self maxYCoordinateInArray:activeGraphPoints];
   double ratio = self.bounds.size.height / maxActiveYPoint;
   
+  if (self.graphDataInputType == GraphDataInputRolling)
+  {
+    NSPoint startPoint = [activeGraphPoints[0] pointValue];
+    startPoint.y *= ratio;
+    [self.path moveToPoint:startPoint];
+  }
+  
+  
   for (int i = 0; i < activeGraphPoints.count; i++)
   {
     NSPoint nextPoint = [activeGraphPoints[i] pointValue];
@@ -126,6 +114,8 @@
   }
   
   NSPoint endPoint = NSMakePoint((self.data.count+1) * self.dataSpacing, 0);
+  if (self.graphDataInputType == GraphDataInputConstant)
+  { segmentAdder(self.path.currentPoint, endPoint, self.path); }
   [self.path moveToPoint:endPoint];
   
   
@@ -139,7 +129,6 @@
   self.gradientLayer.endPoint = CGPointMake(0.5,1.0);
   self.gradientLayer.frame = CGRectMake(0, 0, self.bounds.size.width,
                                         self.bounds.size.height);
-  
   
   self.gradientLayer.colors = self.strokeGradientColors ?: [self stockGradient];
   
@@ -183,21 +172,78 @@
 -(void)setData:(NSArray *)data
 {
   _data = data;
+  
+  switch (self.graphDataInputType) {
+    case GraphDataInputConstant:
+      [self updateFrame];
+      break;
+    case GraphDataInputRolling:
+      [self truncateData];
+      break;
+      
+    default:
+      break;
+  }
+  
   [self updateGraphPoints];
-  [self updateFrame];
+  
+  NSLog(@"-----------------------");
+  NSLog(@"%@", self.graphPoints);
+  NSLog(@"-----------------------");
+  
+  [self.layer setNeedsDisplay];
+}
+
+- (void)truncateData
+{
+  int maxNumberOfGraphPoints = self.bounds.size.width / self.dataSpacing;
+  
+  if (self.data.count <= maxNumberOfGraphPoints) return;
+  
+  NSRange truncRange =
+  NSMakeRange(self.data.count - maxNumberOfGraphPoints, maxNumberOfGraphPoints);
+  NSArray *truncData = [self.data subarrayWithRange:truncRange];
+  
+  _data = truncData;
 }
 
 - (void)updateGraphPoints
 {
   self.graphPoints = [NSMutableArray new];
   
-  for (int i = 0; i < self.data.count; i++) {
-    
-    NSPoint nextPoint = NSMakePoint((i+1) * self.dataSpacing,
-                                    [self.data[i] floatValue]);
-    
-    [self.graphPoints addObject:[NSValue valueWithPoint:nextPoint]];
-    
+  switch (self.graphDataInputType) {
+    case GraphDataInputConstant:
+    {
+      for (int i = 0; i < self.data.count; i++) {
+        
+        NSPoint nextPoint = NSMakePoint((i+1) * self.dataSpacing,
+                                        [self.data[i] floatValue]);
+        
+        [self.graphPoints addObject:[NSValue valueWithPoint:nextPoint]];
+      }
+    }
+      break;
+    case GraphDataInputRolling:
+    {
+      NSPoint lastPoint = NSMakePoint(self.bounds.size.width, 0);
+      
+      for (long i = self.data.count; i > 0; i--) {
+        NSPoint nextPoint = NSMakePoint(lastPoint.x,
+                                        [self.data[i-1] floatValue]);
+        
+//        NSPoint nextPoint = NSMakePoint(lastPoint.x, i);
+        
+        lastPoint.x -= self.dataSpacing;
+        
+        [self.graphPoints insertObject:[NSValue valueWithPoint:nextPoint]
+                               atIndex:0];
+      }
+    }
+      break;
+      
+    default:
+      break;
+      
   }
 }
 
@@ -232,28 +278,27 @@
 
 #pragma mark Private Methods
 
-
 - (NSRange)rangeForAcivePoints
 {
-  
-  NSRect visibleRect = self.enclosingScrollView.documentVisibleRect;
-  float contentXOffset = visibleRect.origin.x;
+  float contentXOffset = self.enclosingScrollView.documentVisibleRect.origin.x;
   
   int relativeMinPoint = floor(contentXOffset / self.dataSpacing);
-  int relativeMaxPoint = ceil((contentXOffset + visibleRect.size.width)
+  int relativeMaxPoint = ceil((contentXOffset + self.bounds.size.width)
                               / self.dataSpacing);
   
   int absoluteMinPoint = 0;
   int absoluteMaxPoint = (int)self.data.count - 1;
   
-  int numberOfOffscreenPoints = 1;
+  int numberOfOffscreenPoints = 2;
   
   int minPoint = [self limitValue:relativeMinPoint - numberOfOffscreenPoints
                           between:absoluteMinPoint and:absoluteMaxPoint];
   int maxPoint = [self limitValue:relativeMaxPoint + numberOfOffscreenPoints
                           between:absoluteMinPoint and:absoluteMaxPoint];
   
-  return NSMakeRange(minPoint, (maxPoint - minPoint));
+  NSRange activeRange = NSMakeRange(minPoint, (maxPoint - minPoint));
+  
+  return activeRange;
 }
 
 - (int)limitValue: (int)value between: (int)min and: (int)max

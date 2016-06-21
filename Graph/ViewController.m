@@ -17,7 +17,6 @@
 
 @property (nonatomic) IBOutlet GraphView *graphView;
 @property (nonatomic) IBOutlet GraphScrollView *graphScrollView;
-@property (nonatomic) int limit;
 
 @end
 
@@ -27,12 +26,12 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  self.limit = 0;
-  
   self.graphView.strokeGradientColors =
   @[(__bridge id)NSColorFromRGB(0x6fbb3d).CGColor,
     (__bridge id)NSColorFromRGB(0x01b0bd).CGColor];
   
+  self.graphView.graphDataInputType = GraphDataInputRolling;
+//  
 //  self.graphView.data = [self generateRandomDataWithNumberOfItems:100
 //                                                         maxValue:250];
   
@@ -49,65 +48,26 @@
   
   [self populateWithNetworkActivity];
   
-  [self tick];
-  
 }
 
 
 - (void)viewWillAppear
 {
   [super viewWillAppear];
-  
   [self.graphView.layer setNeedsDisplay];
-  
-}
-
-- (void)tick
-{
-      
-//      [self.graphScrollView.documentView.layer setNeedsDisplay];
-      
-      NSPoint destination = self.graphScrollView.documentVisibleRect.origin;
-      destination.x += 30;
-      
-      
-      
-      [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
-        [context setDuration: 0];
-        [context setTimingFunction:
-         [CAMediaTimingFunction functionWithName:
-          kCAMediaTimingFunctionEaseInEaseOut]];
-        
-        NSClipView *contentView = [self.graphScrollView contentView];
-        [[contentView animator] setBoundsOrigin:destination];
-        
-      } completionHandler: ^{
-        [self.graphScrollView.documentView.layer setNeedsDisplay];
-      }];
-  
-  
-   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-      [self tick];
-    });
 }
 
 - (void)populateWithNetworkActivity
 {
-  if (self.limit == 60) return;
-  
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
     
     NSDictionary *vals = [Network.instance usage];
     float newVal = [[vals objectForKey:@"WiFiReceived"] floatValue];
-    
-    if (newVal > 500) newVal = 500;
    
     NSMutableArray *update = [NSMutableArray arrayWithArray:self.graphView.data];
     [update addObject:[NSNumber numberWithFloat:newVal]];
     
     self.graphView.data = update;
-    
-    self.limit ++;
     
     [self populateWithNetworkActivity];
     
@@ -131,6 +91,8 @@
     int value = (arc4random() % maxValue);
     [data insertObject:@(value) atIndex:i];
   }
+  
+  NSLog(@"%@", data);
   
   return data;
   
