@@ -64,12 +64,23 @@
 {
   self.dataSpacing    = 30;
   self.lineCurveValue = 0.5;
+  self.rollingUpdateFrequency = 1 * Second;
+  self.rollingMaxHistoryInterval = 1 * Minute;
+
+  [self refresh];
+  
+}
+
+- (void)refresh
+{
   self.data = [self populateEmptyData];
+  [self updateFrame];
 }
 
 - (NSArray *)populateEmptyData
 {
-  int maxNumberOfGraphPoints = self.bounds.size.width / self.dataSpacing;
+  int maxNumberOfGraphPoints = self.rollingUpdateFrequency *
+  self.rollingMaxHistoryInterval * self.dataSpacing;
   NSMutableArray *defaultArray = [NSMutableArray new];
   
   for (int i= 0 ; i < maxNumberOfGraphPoints; i++)
@@ -186,11 +197,6 @@
   }
   
   [self updateGraphPoints];
-  
-  NSLog(@"-----------------------");
-  NSLog(@"%@", self.graphPoints);
-  NSLog(@"-----------------------");
-  
   [self.layer setNeedsDisplay];
 }
 
@@ -252,17 +258,6 @@
   return [self.graphPoints subarrayWithRange:[self rangeForAcivePoints]];
 }
 
-- (NSArray *)stockGradient
-{
-  NSMutableArray *colors = [NSMutableArray array];
-  for (int i = 0; i < 10; i++) {
-    [colors addObject:(id)[[NSColor colorWithHue:(0.1 * i) saturation:1
-                                      brightness:.8 alpha:1] CGColor]];
-  }
-  
-  return colors;
-}
-
 - (double)maxYCoordinateInArray: (NSArray *)array
 {
   double max = 1;
@@ -274,6 +269,35 @@
   }
   
   return max;
+}
+
+-(void)setRollingUpdateFrequency:(NSTimeInterval)rollingUpdateFrequency
+{
+  _rollingUpdateFrequency = rollingUpdateFrequency;
+  [self refresh];
+}
+
+-(void)setRollingMaxHistoryInterval:(NSTimeInterval)rollingMaxHistoryInterval
+{
+  _rollingMaxHistoryInterval = rollingMaxHistoryInterval;
+  [self refresh];
+}
+
+-(void)setDataSpacing:(CGFloat)dataSpacing
+{
+  _dataSpacing = dataSpacing;
+  [self refresh];
+}
+
+- (NSArray *)stockGradient
+{
+  NSMutableArray *colors = [NSMutableArray array];
+  for (int i = 0; i < 10; i++) {
+    [colors addObject:(id)[[NSColor colorWithHue:(0.1 * i) saturation:1
+                                      brightness:.8 alpha:1] CGColor]];
+  }
+  
+  return colors;
 }
 
 #pragma mark Private Methods
@@ -297,7 +321,6 @@
                           between:absoluteMinPoint and:absoluteMaxPoint];
   
   NSRange activeRange = NSMakeRange(minPoint, (maxPoint - minPoint));
-  
   return activeRange;
 }
 

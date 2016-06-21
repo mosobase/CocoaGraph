@@ -8,13 +8,17 @@
 
 #import <Cocoa/Cocoa.h>
 
+#define Second 1
+#define Minute 60
+#define Hour (60 * Minute)
+
 typedef NS_ENUM(NSUInteger, LineStyle) {
   LineStyleSmooth,
   LineStyleStraight
 };
 
 typedef NS_ENUM(NSUInteger, GraphDataInputType) {
-  /// All graph data will be delivered in one data payload
+  /// All graph data will be delivered in one payload
   GraphDataInputConstant,
   /// Graph data will be updated on a rolling basis
   GraphDataInputRolling
@@ -33,5 +37,10 @@ typedef NS_ENUM(NSUInteger, GraphDataInputType) {
 @property (nonatomic) NSArray *strokeGradientColors;
 /// Indicates if graph data will be delivered in a single payload or by appending new values to data array
 @property (nonatomic) GraphDataInputType graphDataInputType;
+
+/// Frequency of rolling updates
+@property (nonatomic) NSTimeInterval rollingUpdateFrequency;
+/// Indicates how long graph history is retained
+@property (nonatomic) NSTimeInterval rollingMaxHistoryInterval;
 
 @end
