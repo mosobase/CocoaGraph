@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C5AAA2E1D19E47300719716 /* GraphScaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C5AAA2D1D19E47300719716 /* GraphScaleView.m */; };
 		1C5FDA851D149CC2000175F3 /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C5FDA841D149CC2000175F3 /* Network.m */; };
 		1C5FDA891D1501D2000175F3 /* GraphScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C5FDA881D1501D2000175F3 /* GraphScrollView.m */; };
 		1CD883571D145A5400889E5F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD883561D145A5400889E5F /* AppDelegate.m */; };
 		1CD8835A1D145A5400889E5F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD883591D145A5400889E5F /* main.m */; };
-		1CD8835D1D145A5400889E5F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8835C1D145A5400889E5F /* ViewController.m */; };
+		1CD8835D1D145A5400889E5F /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8835C1D145A5400889E5F /* GraphViewController.m */; };
 		1CD8835F1D145A5400889E5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CD8835E1D145A5400889E5F /* Assets.xcassets */; };
 		1CD883621D145A5400889E5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CD883601D145A5400889E5F /* Main.storyboard */; };
 		1CD8836E1D1463C900889E5F /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8836D1D1463C900889E5F /* GraphView.m */; };
@@ -20,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C5AAA2C1D19E47300719716 /* GraphScaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphScaleView.h; sourceTree = "<group>"; };
+		1C5AAA2D1D19E47300719716 /* GraphScaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphScaleView.m; sourceTree = "<group>"; };
 		1C5FDA831D149CC2000175F3 /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
 		1C5FDA841D149CC2000175F3 /* Network.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Network.m; sourceTree = "<group>"; };
 		1C5FDA861D14EDDE000175F3 /* ntstat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ntstat.h; sourceTree = "<group>"; };
@@ -29,8 +32,8 @@
 		1CD883551D145A5400889E5F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1CD883561D145A5400889E5F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1CD883591D145A5400889E5F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		1CD8835B1D145A5400889E5F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		1CD8835C1D145A5400889E5F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1CD8835B1D145A5400889E5F /* GraphViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
+		1CD8835C1D145A5400889E5F /* GraphViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 		1CD8835E1D145A5400889E5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1CD883611D145A5400889E5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1CD883631D145A5400889E5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,10 +78,12 @@
 				1C5FDA861D14EDDE000175F3 /* ntstat.h */,
 				1CD883551D145A5400889E5F /* AppDelegate.h */,
 				1CD883561D145A5400889E5F /* AppDelegate.m */,
-				1CD8835B1D145A5400889E5F /* ViewController.h */,
-				1CD8835C1D145A5400889E5F /* ViewController.m */,
+				1CD8835B1D145A5400889E5F /* GraphViewController.h */,
+				1CD8835C1D145A5400889E5F /* GraphViewController.m */,
 				1CD8836C1D1463C900889E5F /* GraphView.h */,
 				1CD8836D1D1463C900889E5F /* GraphView.m */,
+				1C5AAA2C1D19E47300719716 /* GraphScaleView.h */,
+				1C5AAA2D1D19E47300719716 /* GraphScaleView.m */,
 				1C5FDA871D1501D2000175F3 /* GraphScrollView.h */,
 				1C5FDA881D1501D2000175F3 /* GraphScrollView.m */,
 				1C5FDA831D149CC2000175F3 /* Network.h */,
@@ -176,11 +181,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C5FDA891D1501D2000175F3 /* GraphScrollView.m in Sources */,
-				1CD8835D1D145A5400889E5F /* ViewController.m in Sources */,
+				1CD8835D1D145A5400889E5F /* GraphViewController.m in Sources */,
 				1CD883711D14682200889E5F /* NSBezierPath+utilities.m in Sources */,
 				1CD883741D148FBE00889E5F /* NSColor+Theme.m in Sources */,
 				1CD8835A1D145A5400889E5F /* main.m in Sources */,
 				1CD883571D145A5400889E5F /* AppDelegate.m in Sources */,
+				1C5AAA2E1D19E47300719716 /* GraphScaleView.m in Sources */,
 				1C5FDA851D149CC2000175F3 /* Network.m in Sources */,
 				1CD8836E1D1463C900889E5F /* GraphView.m in Sources */,
 			);

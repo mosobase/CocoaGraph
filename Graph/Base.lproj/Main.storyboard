@@ -664,18 +664,18 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
+        <!--Graph View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="GraphViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView wantsLayer="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="wJT-pl-b4B" customClass="GraphScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                                <clipView key="contentView" wantsLayer="YES" id="3C3-gD-jUy">
-                                    <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <rect key="frame" x="-1" y="0.0" width="481" height="270"/>
+                                <clipView key="contentView" wantsLayer="YES" drawsBackground="NO" copiesOnScroll="NO" id="3C3-gD-jUy">
+                                    <rect key="frame" x="0.0" y="0.0" width="481" height="270"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fjW-cy-oEX" customClass="GraphView">
@@ -684,21 +684,23 @@
                                         </view>
                                     </subviews>
                                 </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="270" id="PWZ-xT-S4a"/>
+                                </constraints>
                                 <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="MVt-3I-loQ">
-                                    <rect key="frame" x="0.0" y="254" width="480" height="16"/>
+                                    <rect key="frame" x="0.0" y="254" width="481" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="9dy-3i-Ssj">
-                                    <rect key="frame" x="464" y="0.0" width="16" height="270"/>
+                                    <rect key="frame" x="465" y="0.0" width="16" height="270"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="wJT-pl-b4B" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" id="Jdy-cy-Vli"/>
-                            <constraint firstItem="wJT-pl-b4B" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="KWx-Ni-jb5"/>
-                            <constraint firstItem="wJT-pl-b4B" firstAttribute="height" secondItem="m2S-Jp-Qdl" secondAttribute="height" id="Rz1-xA-ImN"/>
-                            <constraint firstItem="wJT-pl-b4B" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="X22-bM-gXA"/>
+                            <constraint firstItem="wJT-pl-b4B" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="1K1-08-fbe"/>
+                            <constraint firstItem="wJT-pl-b4B" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="Q2e-qy-xbd"/>
+                            <constraint firstItem="wJT-pl-b4B" firstAttribute="width" secondItem="m2S-Jp-Qdl" secondAttribute="width" id="RCe-aH-Jv4"/>
                         </constraints>
                     </view>
                     <connections>

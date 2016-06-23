@@ -116,7 +116,7 @@ static NSString *const DataCounterKeyWiFiReceived = @"WiFiReceived";
 //  double newVal = (currentWifiDelta * α * 10) + (self.previousWiFiDelta * (1.0 - α));
   
   
-  NSLog(@"%f", currentWifiDelta * Megabit);
+//  NSLog(@"%f", currentWifiDelta * Megabit);
   
   NSDictionary *result =
   @{DataCounterKeyWiFiSent:[NSNumber numberWithUnsignedInt:WiFiSent],

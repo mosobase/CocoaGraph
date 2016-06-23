@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "GraphScaleView.h"
 
 #define Second 1
 #define Minute 60
@@ -33,14 +34,21 @@ typedef NS_ENUM(NSUInteger, GraphDataInputType) {
 @property (nonatomic) float lineCurveValue;
 /// Indicate the style of the graph; connected by straight lines or curved lines
 @property (nonatomic) LineStyle lineStyle;
+/// Indicate the Line Width of the graph
+@property (nonatomic) CGFloat lineWidth;
 /// NSArray of CGColorRef values making up the stroke gradient
 @property (nonatomic) NSArray *strokeGradientColors;
 /// Indicates if graph data will be delivered in a single payload or by appending new values to data array
 @property (nonatomic) GraphDataInputType graphDataInputType;
 
+/// Padding between the highest point on the graph and the view height
+@property (nonatomic) float paddingTop;
+
 /// Frequency of rolling updates
 @property (nonatomic) NSTimeInterval rollingUpdateFrequency;
 /// Indicates how long graph history is retained
 @property (nonatomic) NSTimeInterval rollingMaxHistoryInterval;
+
+@property (nonatomic) GraphScaleView *scaleView;
 
 @end

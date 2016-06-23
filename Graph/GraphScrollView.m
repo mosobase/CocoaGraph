@@ -14,7 +14,7 @@
 {
   self = [super initWithCoder:coder];
   if (self) {
-    self.horizontalScroller.alphaValue = 0;
+//    self.horizontalScroller.alphaValue = 0;
     self.verticalScroller.alphaValue = 0;
     
   }
