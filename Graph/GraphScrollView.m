@@ -21,10 +21,4 @@
   return self;
 }
 
-//+(BOOL)isCompatibleWithResponsiveScrolling
-//{
-//  return YES;
-//}
-
-
 @end

@@ -56,20 +56,8 @@
   self.graphView.scaleView = [[GraphScaleView alloc]
                               initWithFrame:self.graphView.frame];
   
-  
-//  NSView *test = [[NSView alloc] initWithFrame:NSMakeRect(50, 50, 50, 50)];
-//  [test setWantsLayer:YES];
-//  test.layer.backgroundColor = [NSColor redColor].CGColor;
-//  
-//  [self.view addSubview:test
-//             positioned:NSWindowBelow relativeTo:self.graphView];
-  
-//  self.graphView.scaleView.constraints = self.graphView.constraints;
-  
   [self.view addSubview:self.graphView.scaleView
                         positioned:NSWindowBelow relativeTo:self.graphView];
-  
-  
 }
 
 

@@ -44,8 +44,7 @@
 {
   [self setWantsLayer:YES];
   self.layer.backgroundColor = NSColorFromRGB(0xf2f1f0).CGColor;
-  self.layerContentsRedrawPolicy = NSViewLayerContentsRedrawDuringViewResize |
-                                   NSViewLayerContentsRedrawOnSetNeedsDisplay;
+  self.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
   
   [self.layer setNeedsDisplay];
   
@@ -62,30 +61,6 @@
   _numberOfScaleLines = numberOfScaleLines;
   [self createVerticalLabels];
 }
-
-//-(void)drawRect:(NSRect)dirtyRect
-//{
-//  [super drawRect:dirtyRect];
-//}
-//
-//-(void)updateLayer
-//{
-//  NSBezierPath *path = [NSBezierPath bezierPath];
-//  
-//  for (int i = 0; i <= self.frame.size.height;
-//       i += self.frame.size.height / self.numberOfScaleLines)
-//  {
-//    NSPoint startPoint = NSMakePoint(0, i);
-//    NSPoint endPoint   = NSMakePoint(self.frame.size.width, i);
-//    
-//    [self addStraigtLineSegmentFrom:startPoint to:endPoint inPath:path];
-//  }
-//  
-//  ((CAShapeLayer *)self.layer).path = path.quartzPath;
-//  ((CAShapeLayer *)self.layer).strokeColor = NSColorFromRGB(0xDCDBD8).CGColor;
-//  ((CAShapeLayer *)self.layer).lineWidth = 1.5;
-//
-//}
 
 
 -(void)drawLayer:(CAShapeLayer *)layer inContext:(CGContextRef)ctx
@@ -123,9 +98,12 @@
   
   for (int i = 0; i < self.labels.count; i++)
   {
+    int value = (int)(maxY / self.numberOfScaleLines) * i;
+    
     NSTextField *label = self.labels[i];
-    label.stringValue = [NSString stringWithFormat:@"%d",
-                         (int)(maxY / self.numberOfScaleLines) * i];
+    label.stringValue = value ? [NSString stringWithFormat:@"%d", value] : @"";
+    
+    if (value==0 && i==0) label.stringValue = @"0";
     
   }
 }
@@ -148,6 +126,7 @@
     [label setBordered:NO];
     [label setBezeled:NO];
     [label setDrawsBackground:NO];
+    [label setEditable:NO];
     [label setTextColor:NSColorFromRGB(0x746f65)];
     
     label.stringValue = [NSString stringWithFormat:@"%d", i];
