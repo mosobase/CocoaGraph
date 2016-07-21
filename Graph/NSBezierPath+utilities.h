@@ -9,6 +9,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface NSBezierPath (BezierPathQuartzUtilities)
-- (CGPathRef)quartzPath;
+- (CGPathRef)newQuartzPath;
 - (void)addQuadCurveToPoint:(CGPoint)QP2 controlPoint:(CGPoint)QP1;
 @end

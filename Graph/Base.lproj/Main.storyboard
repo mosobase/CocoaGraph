@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11129.15" systemVersion="16A201w" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11173.2" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11129.15"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11173.2"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -674,7 +674,7 @@
                         <subviews>
                             <scrollView wantsLayer="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="wJT-pl-b4B" customClass="GraphScrollView">
                                 <rect key="frame" x="-1" y="0.0" width="481" height="270"/>
-                                <clipView key="contentView" wantsLayer="YES" drawsBackground="NO" copiesOnScroll="NO" id="3C3-gD-jUy">
+                                <clipView key="contentView" wantsLayer="YES" drawsBackground="NO" copiesOnScroll="NO" id="3C3-gD-jUy" customClass="GraphClipView">
                                     <rect key="frame" x="0.0" y="0.0" width="481" height="270"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -683,6 +683,9 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         </view>
                                     </subviews>
+                                    <connections>
+                                        <outlet property="graphView" destination="fjW-cy-oEX" id="oKU-ux-WPo"/>
+                                    </connections>
                                 </clipView>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="270" id="PWZ-xT-S4a"/>
@@ -692,7 +695,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="9dy-3i-Ssj">
-                                    <rect key="frame" x="465" y="0.0" width="16" height="270"/>
+                                    <rect key="frame" x="466" y="0.0" width="15" height="270"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>

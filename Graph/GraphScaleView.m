@@ -14,6 +14,7 @@
 
 @interface GraphScaleView()
 @property (nonatomic) NSMutableArray *labels;
+@property (nonatomic) CGFloat maxY;
 @end
 
 
@@ -100,7 +101,10 @@
     [self addStraigtLineSegmentFrom:startPoint to:endPoint inPath:path];
   }
   
-  layer.path = path.quartzPath;
+  CGPathRef quartzPath = [path newQuartzPath];
+  layer.path = quartzPath;
+  CGPathRelease(quartzPath);
+    
   layer.strokeColor = NSColorFromRGB(0xDCDBD8).CGColor;
   layer.lineWidth = 1.5;
 }
@@ -114,6 +118,9 @@
 
 - (void)updateVeriticalLabelsWithMaxY: (int)maxY
 {
+  if (maxY == self.maxY) return;
+  self.maxY = maxY;
+  
   for (int i = 0; i < self.labels.count; i++)
   {
     NSTextField *label = self.labels[i];

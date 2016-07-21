@@ -8,8 +8,8 @@
 
 #import "NSBezierPath+utilities.h"
 
-@implementation NSBezierPath (BezierPathQuartzUtilities)// This method works only in OS X v10.2 and later.
-- (CGPathRef)quartzPath
+@implementation NSBezierPath (BezierPathQuartzUtilities)
+- (CGPathRef)newQuartzPath
 {
   int i, numElements;
   

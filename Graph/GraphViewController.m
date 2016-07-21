@@ -33,10 +33,14 @@
     
   self.graphView.data = [self generateRandomDataWithNumberOfItems:300
                                                          maxValue:100];
-  [self.graphView.layer setNeedsDisplay];
   
 //  self.graphView.graphDataInputType = GraphDataInputRolling;
 //  [self populateWithNetworkActivity];
+}
+
+-(void)viewDidAppear
+{
+  [self.graphView.layer setNeedsDisplay];
 }
 
 - (void)awakeFromNib
@@ -119,7 +123,7 @@
   
 //  NSLog(@"%@", data);
   
-  return data;
+  return [data copy];
   
 }
 

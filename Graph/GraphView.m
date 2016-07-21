@@ -96,6 +96,7 @@ static const CGFloat PaddingBottom = 0.001;
 
 -(void)updateLayer
 {
+  
   if (self.data.count == 0) return;
   
   void (^segmentAdder)(NSPoint, NSPoint, NSBezierPath *) =
@@ -141,8 +142,10 @@ static const CGFloat PaddingBottom = 0.001;
   [trans translateXBy:0 yBy: self.lineWidth/2];
   [path transformUsingAffineTransform: trans];
   
+  CGPathRef quartzPath = [path newQuartzPath];
+  self.graphLayer.path = quartzPath;
+  CGPathRelease(quartzPath);
   
-  self.graphLayer.path = path.quartzPath;
   self.graphLayer.lineWidth = self.lineWidth;
   self.graphLayer.fillColor = nil;
   self.graphLayer.strokeColor = NSColor.whiteColor.CGColor;

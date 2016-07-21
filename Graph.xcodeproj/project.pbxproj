@@ -16,18 +16,19 @@
 		1CD8835F1D145A5400889E5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CD8835E1D145A5400889E5F /* Assets.xcassets */; };
 		1CD883621D145A5400889E5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1CD883601D145A5400889E5F /* Main.storyboard */; };
 		1CD8836E1D1463C900889E5F /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8836D1D1463C900889E5F /* GraphView.m */; };
-		1CD883711D14682200889E5F /* NSBezierPath+utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD883701D14682200889E5F /* NSBezierPath+utilities.m */; };
 		1CD883741D148FBE00889E5F /* NSColor+Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD883731D148FBE00889E5F /* NSColor+Theme.m */; };
+		79112CBD1D4146B10030C1C1 /* NSBezierPath+utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 79112CBC1D4146B10030C1C1 /* NSBezierPath+utilities.m */; };
+		79112CC01D4149910030C1C1 /* GraphClipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79112CBF1D4149910030C1C1 /* GraphClipView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1C5AAA2C1D19E47300719716 /* GraphScaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphScaleView.h; sourceTree = "<group>"; };
-		1C5AAA2D1D19E47300719716 /* GraphScaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphScaleView.m; sourceTree = "<group>"; };
+		1C5AAA2D1D19E47300719716 /* GraphScaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = GraphScaleView.m; sourceTree = "<group>"; tabWidth = 2; };
 		1C5FDA831D149CC2000175F3 /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
 		1C5FDA841D149CC2000175F3 /* Network.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Network.m; sourceTree = "<group>"; };
 		1C5FDA861D14EDDE000175F3 /* ntstat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ntstat.h; sourceTree = "<group>"; };
 		1C5FDA871D1501D2000175F3 /* GraphScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphScrollView.h; sourceTree = "<group>"; };
-		1C5FDA881D1501D2000175F3 /* GraphScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphScrollView.m; sourceTree = "<group>"; };
+		1C5FDA881D1501D2000175F3 /* GraphScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = GraphScrollView.m; sourceTree = "<group>"; tabWidth = 2; };
 		1CD883521D145A5400889E5F /* Graph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CD883551D145A5400889E5F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1CD883561D145A5400889E5F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -38,11 +39,13 @@
 		1CD883611D145A5400889E5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1CD883631D145A5400889E5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1CD8836C1D1463C900889E5F /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
-		1CD8836D1D1463C900889E5F /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
-		1CD8836F1D14682200889E5F /* NSBezierPath+utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath+utilities.h"; sourceTree = "<group>"; };
-		1CD883701D14682200889E5F /* NSBezierPath+utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+utilities.m"; sourceTree = "<group>"; };
+		1CD8836D1D1463C900889E5F /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; tabWidth = 2; };
 		1CD883721D148FBE00889E5F /* NSColor+Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSColor+Theme.h"; sourceTree = "<group>"; };
 		1CD883731D148FBE00889E5F /* NSColor+Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSColor+Theme.m"; sourceTree = "<group>"; };
+		79112CBB1D4146B10030C1C1 /* NSBezierPath+utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath+utilities.h"; sourceTree = "<group>"; };
+		79112CBC1D4146B10030C1C1 /* NSBezierPath+utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+utilities.m"; sourceTree = "<group>"; };
+		79112CBE1D4149910030C1C1 /* GraphClipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphClipView.h; sourceTree = "<group>"; };
+		79112CBF1D4149910030C1C1 /* GraphClipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphClipView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,14 +85,16 @@
 				1CD8835C1D145A5400889E5F /* GraphViewController.m */,
 				1CD8836C1D1463C900889E5F /* GraphView.h */,
 				1CD8836D1D1463C900889E5F /* GraphView.m */,
+				79112CBE1D4149910030C1C1 /* GraphClipView.h */,
+				79112CBF1D4149910030C1C1 /* GraphClipView.m */,
 				1C5AAA2C1D19E47300719716 /* GraphScaleView.h */,
 				1C5AAA2D1D19E47300719716 /* GraphScaleView.m */,
 				1C5FDA871D1501D2000175F3 /* GraphScrollView.h */,
 				1C5FDA881D1501D2000175F3 /* GraphScrollView.m */,
 				1C5FDA831D149CC2000175F3 /* Network.h */,
 				1C5FDA841D149CC2000175F3 /* Network.m */,
-				1CD8836F1D14682200889E5F /* NSBezierPath+utilities.h */,
-				1CD883701D14682200889E5F /* NSBezierPath+utilities.m */,
+				79112CBB1D4146B10030C1C1 /* NSBezierPath+utilities.h */,
+				79112CBC1D4146B10030C1C1 /* NSBezierPath+utilities.m */,
 				1CD883721D148FBE00889E5F /* NSColor+Theme.h */,
 				1CD883731D148FBE00889E5F /* NSColor+Theme.m */,
 				1CD8835E1D145A5400889E5F /* Assets.xcassets */,
@@ -182,11 +187,12 @@
 			files = (
 				1C5FDA891D1501D2000175F3 /* GraphScrollView.m in Sources */,
 				1CD8835D1D145A5400889E5F /* GraphViewController.m in Sources */,
-				1CD883711D14682200889E5F /* NSBezierPath+utilities.m in Sources */,
 				1CD883741D148FBE00889E5F /* NSColor+Theme.m in Sources */,
+				79112CBD1D4146B10030C1C1 /* NSBezierPath+utilities.m in Sources */,
 				1CD8835A1D145A5400889E5F /* main.m in Sources */,
 				1CD883571D145A5400889E5F /* AppDelegate.m in Sources */,
 				1C5AAA2E1D19E47300719716 /* GraphScaleView.m in Sources */,
+				79112CC01D4149910030C1C1 /* GraphClipView.m in Sources */,
 				1C5FDA851D149CC2000175F3 /* Network.m in Sources */,
 				1CD8836E1D1463C900889E5F /* GraphView.m in Sources */,
 			);
@@ -296,6 +302,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Graph/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tunnelbear.ios.Graph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -308,6 +315,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Graph/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tunnelbear.ios.Graph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

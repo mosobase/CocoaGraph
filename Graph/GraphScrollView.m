@@ -14,20 +14,17 @@
 {
   self = [super initWithCoder:coder];
   if (self) {
-//    self.horizontalScroller.alphaValue = 0;
+    //    self.horizontalScroller.alphaValue = 0;
     self.verticalScroller.alphaValue = 0;
     
   }
   return self;
 }
 
-- (void)scrollWheel: (NSEvent *)event
-{
-  [super scrollWheel: event];
-  
-  [self.documentView.layer setNeedsDisplay];
-  
-//  NSLog(@"%f", self.documentVisibleRect.origin.x);
-}
+//+(BOOL)isCompatibleWithResponsiveScrolling
+//{
+//  return YES;
+//}
+
 
 @end
